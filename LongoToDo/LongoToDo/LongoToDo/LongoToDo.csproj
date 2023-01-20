@@ -26,5 +26,17 @@
     <None Remove="Fody" />
     <None Remove="PropertyChanged.Fody" />
     <None Remove="Xamarin.CommunityToolkit" />
+    <None Remove="Services\" />
+    <None Remove="Services\DependecyService\" />
+    <None Remove="Base\" />
+    <None Remove="Features\" />
+    <None Remove="Model\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Services\" />
+    <Folder Include="Services\DependecyService\" />
+    <Folder Include="Base\" />
+    <Folder Include="Features\" />
+    <Folder Include="Model\" />
   </ItemGroup>
 </Project>
