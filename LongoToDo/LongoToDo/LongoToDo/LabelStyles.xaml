@@ -52,5 +52,16 @@
         <Setter Property="HorizontalOptions" Value="EndAndExpand"/>
         <Setter Property="TextColor" Value="{StaticResource Verde}" />
     </Style>
+
+    <Style
+        x:Key="Mas"
+        BasedOn="{StaticResource LabelCenter}"
+        TargetType="Label">
+        <Setter Property="FontFamily" Value="IconBrand" />
+        <Setter Property="FontSize" Value="20"/>
+        <Setter Property="Text" Value="{x:Static icons:IconFont.Plus}"/>
+        <Setter Property="HorizontalOptions" Value="EndAndExpand"/>
+        <Setter Property="TextColor" Value="{StaticResource Blanco}" />
+    </Style>
 </ResourceDictionary>
 

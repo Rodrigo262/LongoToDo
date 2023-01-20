@@ -12,7 +12,7 @@
     <ContentPage.Content>
         <Grid>
             <StackLayout Grid.Row="0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Margin="20">
-                <Label Text="To Do List" Style="{StaticResource TitleStartBold}" Margin="20"/>
+                <Label Text="{longoToDo:Translate TitleToDoList}" Style="{StaticResource TitleStartBold}" Margin="20"/>
                 <CollectionView ItemsSource="{Binding ItemList}" SelectionMode="Single">
                     <CollectionView.ItemsLayout>
                         <LinearItemsLayout ItemSpacing="10" Orientation="Vertical" />
@@ -35,8 +35,18 @@
                         </ContentView>
                     </CollectionView.EmptyView>
                 </CollectionView>
+                <Frame CornerRadius="25"
+                   Padding="15"
+                   Margin="0,0,15,40" BackgroundColor="{StaticResource AzulClaro}"
+                   HorizontalOptions="End"
+                   VerticalOptions="End">
+                    <Label Style="{StaticResource Mas}"/>
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding NewItemCommand}"/>
+                    </Frame.GestureRecognizers>
+                </Frame>
             </StackLayout>
-
+           
             <controls:LoadingView
                 Grid.Row="0"
                 IsVisible="{Binding IsVisible}"

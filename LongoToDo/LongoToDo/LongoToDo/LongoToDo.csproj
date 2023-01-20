@@ -39,6 +39,8 @@
     <None Remove="Resources\Fonts\SfProDisplayBold.otf" />
     <None Remove="Resources\Fonts\" />
     <None Remove="Resources\Resx\" />
+    <None Remove="Features\Main\" />
+    <None Remove="Services\HttpClientService\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Services\" />
@@ -51,6 +53,8 @@
     <Folder Include="Resources\Styles\" />
     <Folder Include="Resources\Fonts\" />
     <Folder Include="Resources\Resx\" />
+    <Folder Include="Features\Main\" />
+    <Folder Include="Services\HttpClientService\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\Fonts\IconBrand.otf" />

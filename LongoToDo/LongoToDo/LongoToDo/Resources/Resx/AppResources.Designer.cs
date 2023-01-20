@@ -58,7 +58,52 @@ namespace LongoToDo.Resources.Resx {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to No items to display. Check connection.
+        ///   Looks up a localized string similar to Cancel.
+        /// </summary>
+        internal static string BtnCancel {
+            get {
+                return ResourceManager.GetString("BtnCancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to New.
+        /// </summary>
+        internal static string BtnNew {
+            get {
+                return ResourceManager.GetString("BtnNew", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ok.
+        /// </summary>
+        internal static string BtnOk {
+            get {
+                return ResourceManager.GetString("BtnOk", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error.
+        /// </summary>
+        internal static string Error {
+            get {
+                return ResourceManager.GetString("Error", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Infomation.
+        /// </summary>
+        internal static string Info {
+            get {
+                return ResourceManager.GetString("Info", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No items to display. Check connection..
         /// </summary>
         internal static string MsgEmptyList {
             get {
@@ -72,6 +117,42 @@ namespace LongoToDo.Resources.Resx {
         internal static string MsgLoading {
             get {
                 return ResourceManager.GetString("MsgLoading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Required field.
+        /// </summary>
+        internal static string MsgRequiredField {
+            get {
+                return ResourceManager.GetString("MsgRequiredField", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Name.
+        /// </summary>
+        internal static string PlaceholderName {
+            get {
+                return ResourceManager.GetString("PlaceholderName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Name.
+        /// </summary>
+        internal static string TitleName {
+            get {
+                return ResourceManager.GetString("TitleName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to To Do List.
+        /// </summary>
+        internal static string TitleToDoList {
+            get {
+                return ResourceManager.GetString("TitleToDoList", resourceCulture);
             }
         }
     }
