@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using LongoToDo.Base;
 using Xamarin.Forms;
+using LongoToDo.Model;
 
 namespace LongoToDo.Features
 {

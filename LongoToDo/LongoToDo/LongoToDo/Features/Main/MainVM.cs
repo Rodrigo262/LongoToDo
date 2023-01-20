@@ -19,6 +19,7 @@ namespace LongoToDo.Features
 
         public ICommand NewItemCommand { get; protected set; }
         public ICommand DeleteItemCommand { get; protected set; }
+        public ICommand TapCommand { get; protected set; }
 
         public MainVM() { }
 
@@ -48,9 +49,30 @@ namespace LongoToDo.Features
         {
             NewItemCommand = new Command(async () => await NewItemAsync());
             DeleteItemCommand = new Command<ToDoItems>(async (ToDoItems toDoItems) => await DeleteItemAsync(toDoItems));
+            TapCommand = new Command<ToDoItems>((ToDoItems toDoItems) => ChangeState(toDoItems));
+        }
+        private void ChangeState(ToDoItems toDoItems)
+        {
+            try
+            {
+                if (toDoItems != null)
+                {
+                    int index = ItemList.IndexOf(toDoItems);
+
+                    if (index != -1)
+                    {
+                        toDoItems.IsComplete = !toDoItems.IsComplete;
+                        ItemList[index] = toDoItems;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+            }
         }
 
-		public async Task GetItems()
+        private async Task GetItems()
 		{
 			try
 			{
@@ -67,7 +89,7 @@ namespace LongoToDo.Features
             }
         }
 
-        public async Task NewItemAsync()
+        private async Task NewItemAsync()
 		{
 			try
 			{
@@ -79,7 +101,7 @@ namespace LongoToDo.Features
 			}
 		}
 
-		public async Task DeleteItemAsync(ToDoItems toDoItems)
+        private async Task DeleteItemAsync(ToDoItems toDoItems)
 		{
             try
             {
