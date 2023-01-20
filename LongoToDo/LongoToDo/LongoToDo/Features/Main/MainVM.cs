@@ -20,6 +20,7 @@ namespace LongoToDo.Features
         public ICommand NewItemCommand { get; protected set; }
         public ICommand DeleteItemCommand { get; protected set; }
         public ICommand TapCommand { get; protected set; }
+        public ICommand RefreshCommand { get; protected set; }
 
         public MainVM() { }
 
@@ -50,8 +51,10 @@ namespace LongoToDo.Features
             NewItemCommand = new Command(async () => await NewItemAsync());
             DeleteItemCommand = new Command<ToDoItems>(async (ToDoItems toDoItems) => await DeleteItemAsync(toDoItems));
             TapCommand = new Command<ToDoItems>((ToDoItems toDoItems) => ChangeState(toDoItems));
+            RefreshCommand = new Command(async () => await RefreshAsync());
         }
-        private void ChangeState(ToDoItems toDoItems)
+
+        public bool ChangeState(ToDoItems toDoItems)
         {
             try
             {
@@ -65,17 +68,38 @@ namespace LongoToDo.Features
                         ItemList[index] = toDoItems;
                     }
                 }
+                return false;
             }
             catch (Exception ex)
             {
                 Debug.WriteLine(ex.Message);
             }
+
+            return false;
+        }
+
+        private async Task RefreshAsync()
+        {
+            try
+            {
+                IsRefreshing = true;
+                await GetItems();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+            }
+
+            IsRefreshing = false;
         }
 
         private async Task GetItems()
 		{
 			try
 			{
+                IsBusy = true;
+                IsVisible = true;
+
                 IEnumerable<ToDoItems> list = await new ToDoItems(dependencyService).GetAll();
 
                 if (list.Any())
@@ -87,25 +111,36 @@ namespace LongoToDo.Features
 			{
                 Debug.WriteLine(ex.Message);
             }
+
+            IsVisible = false;
+            IsVisible = false;
         }
 
         private async Task NewItemAsync()
 		{
 			try
 			{
-				await PushAsync(new NewItemView());
+                IsBusy = true;
+                IsVisible = true;
+
+                await PushAsync(new NewItemView());
 			}
 			catch (Exception ex)
 			{
 				Debug.WriteLine(ex.Message);
 			}
-		}
+            IsVisible = false;
+            IsVisible = false;
+        }
 
         private async Task DeleteItemAsync(ToDoItems toDoItems)
 		{
             try
             {
-				bool response = await new ToDoItems(dependencyService).DeleteItem(toDoItems);
+                IsBusy = true;
+                IsVisible = true;
+
+                bool response = await new ToDoItems(dependencyService).DeleteItem(toDoItems);
 
 				if (response)
 				{
@@ -117,6 +152,8 @@ namespace LongoToDo.Features
             {
                 Debug.WriteLine(ex.Message);
             }
+            IsVisible = false;
+            IsVisible = false;
         }
     }
 }
