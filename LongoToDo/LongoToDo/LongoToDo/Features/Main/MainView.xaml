@@ -13,7 +13,9 @@
         <Grid>
             <StackLayout Grid.Row="0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Margin="20">
                 <Label Text="{longoToDo:Translate TitleToDoList}" Style="{StaticResource TitleStartBold}" Margin="20"/>
-                <CollectionView ItemsSource="{Binding ItemList}" SelectionMode="Single" x:Name="collectionView">
+                <CollectionView ItemsSource="{Binding ItemList}"
+                                SelectionMode="Single"
+                                x:Name="collectionView">
                     <CollectionView.ItemsLayout>
                         <LinearItemsLayout ItemSpacing="10" Orientation="Vertical" />
                     </CollectionView.ItemsLayout>
@@ -38,6 +40,11 @@
                                     </Grid>
                                 </Frame>
                                 </SwipeView>
+                                <StackLayout.GestureRecognizers>
+                                    <TapGestureRecognizer BindingContext="{Binding Source={x:Reference collectionView}, Path=BindingContext}"
+                                                Command="{Binding Source={x:Reference collectionView}, Path=BindingContext.TapCommand}"
+                                                CommandParameter="{Binding Source={x:Reference Item}, Path=BindingContext}"/>
+                                </StackLayout.GestureRecognizers>
                             </StackLayout>
                         </DataTemplate>
                     </CollectionView.ItemTemplate>

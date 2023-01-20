@@ -32,7 +32,7 @@ namespace LongoToDo.Features
             SaveItemCommand = new Command(async () => await SaveItemAsync());
         }
 
-        public async Task SaveItemAsync()
+        private async Task SaveItemAsync()
         {
             try
             {
