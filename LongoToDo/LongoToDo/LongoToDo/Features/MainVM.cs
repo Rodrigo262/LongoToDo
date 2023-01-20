@@ -3,11 +3,17 @@ using System.Threading.Tasks;
 using LongoToDo.Base;
 using LongoToDo.Services;
 using Xamarin.Forms;
+using LongoToDo.Model;
+using System.Collections.ObjectModel;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace LongoToDo.Features
 {
 	public class MainVM : BaseVM
 	{
+		public ObservableCollection<ToDoItems> ItemList { get; set; }
+		
 		public MainVM() { }
 
 		public MainVM(IDependencyService dependency) : base(dependency) { }
@@ -17,10 +23,16 @@ namespace LongoToDo.Features
 			try
 			{
 				IsBusy = true;
-				IsVisible = false;
+				IsVisible = true;
 
-				//Ping = await dependencyService.Get<IHttpClientService>().Ping();
-				//var b = await dependencyService.Get<IHttpClientService>().CallApi<object, object>(null, string.Empty, HttpRequestType.Get, 80, false);
+				IEnumerable<ToDoItems> list = await new ToDoItems(dependencyService).GetAll();
+
+				if (list.Any())
+				{
+					ItemList = new ObservableCollection<ToDoItems>(list);
+				}
+
+				ItemList = null;
 			}
 			catch (Exception ex)
 			{

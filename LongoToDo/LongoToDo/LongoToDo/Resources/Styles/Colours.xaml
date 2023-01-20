@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ResourceDictionary
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="LongoToDo.Colours">
+        <Color x:Key="Blanco">#ffffff</Color>
+        <Color x:Key="Negro">#000000</Color>
+        <Color x:Key="Rojo">#ff3b30</Color>
+        <Color x:Key="Verde">#03C03C</Color>
+        <Color x:Key="AzulClaro">#95BAF7</Color>
+        <Color x:Key="AzulOscuro">#140A8C</Color>
+</ResourceDictionary>

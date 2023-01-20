@@ -20,8 +20,8 @@ namespace LongoToDo.Services
         private CancellationTokenSource cts;
 
         public static string BaseAddress =
-            DeviceInfo.Platform == DevicePlatform.Android ? "https://10.0.2.2:8080" : "https://localhost:8080";
-        public static string TodoItemsUrl = $"{BaseAddress}/api/todo/";
+            DeviceInfo.Platform == DevicePlatform.Android ? "http://10.0.2.2:8080" : "http://localhost:8080";
+        public static string TodoItemsUrl = $"{BaseAddress}/api/todo";
 
         public JsonSerializerSettings JsonSerializerSettings;
 
@@ -29,9 +29,13 @@ namespace LongoToDo.Services
 
         public HttpClientService()
         {
-            HttpClientHandler insecureHandler = GetInsecureHandler();
+            //HttpClientHandler insecureHandler = GetInsecureHandler();
 
-            httpClient = new HttpClient(insecureHandler) { BaseAddress = new Uri(BaseAddress) };
+            HttpClientHandler clientHandler = new HttpClientHandler();
+            clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
+            //HttpClient client = new HttpClient(clientHandler);
+
+            httpClient = new HttpClient(clientHandler) { BaseAddress = new Uri(TodoItemsUrl) };
 
             httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 

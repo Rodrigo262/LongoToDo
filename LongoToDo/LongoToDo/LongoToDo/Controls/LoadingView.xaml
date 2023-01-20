@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentView
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="LongoToDo.Controls.LoadingView">
+    <ContentView.Content>
+        <Grid
+            BackgroundColor="Transparent"
+            Opacity="0.6"
+            RowDefinitions="*, Auto, *"
+            RowSpacing="10">
+            <Frame
+                Grid.Row="1"
+                Margin="40"
+                BackgroundColor="{StaticResource Negro}"
+                CornerRadius="5">
+                <StackLayout Spacing="40">
+                    <ActivityIndicator
+                        HorizontalOptions="CenterAndExpand"
+                        IsRunning="True"
+                        VerticalOptions="CenterAndExpand"
+                        Color="{StaticResource Blanco}" />
+                    <Label
+                        x:Name="label"
+                        Grid.Row="2"
+                        HorizontalOptions="CenterAndExpand"
+                        TextColor="{StaticResource Blanco}" />
+                </StackLayout>
+            </Frame>
+        </Grid>
+    </ContentView.Content>
+</ContentView>
+
