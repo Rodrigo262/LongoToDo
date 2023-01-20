@@ -2,11 +2,12 @@
 using LongoToDo.Features;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-
+using LongoToDo.Services;
 namespace LongoToDo
 {
     public partial class App : Application
     {
+        
         public static INavigation Nav { get; set; }
 
         public App ()
@@ -16,7 +17,6 @@ namespace LongoToDo
             NavigationPage navigationPage = new NavigationPage(new MainView());
             NavigationPage.SetHasNavigationBar(navigationPage.CurrentPage, false);
             MainPage = navigationPage;
-
         }
 
         protected override void OnStart ()
@@ -32,4 +32,3 @@ namespace LongoToDo
         }
     }
 }
-

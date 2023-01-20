@@ -8,9 +8,10 @@ using System.Threading;
 using System.Threading.Tasks;
 using LongoToDo.Services;
 using Newtonsoft.Json;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
-[assembly:Dependency(typeof(HttpClientService))]
+[assembly: Dependency(typeof(HttpClientService))]
 namespace LongoToDo.Services
 {
 	public class HttpClientService : IHttpClientService
@@ -18,14 +19,19 @@ namespace LongoToDo.Services
         private readonly HttpClient httpClient;
         private CancellationTokenSource cts;
 
-        private readonly string Host = "http://localhost:8080/api/todo";
+        public static string BaseAddress =
+            DeviceInfo.Platform == DevicePlatform.Android ? "https://10.0.2.2:8080" : "https://localhost:8080";
+        public static string TodoItemsUrl = $"{BaseAddress}/api/todo/";
+
         public JsonSerializerSettings JsonSerializerSettings;
 
         public string Token { get; set; } = string.Empty;
 
         public HttpClientService()
         {
-            httpClient = new HttpClient() { BaseAddress = new Uri(Host) };
+            HttpClientHandler insecureHandler = GetInsecureHandler();
+
+            httpClient = new HttpClient(insecureHandler) { BaseAddress = new Uri(BaseAddress) };
 
             httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
@@ -37,10 +43,21 @@ namespace LongoToDo.Services
                 Formatting = Formatting.Indented
             };
         }
+        private HttpClientHandler GetInsecureHandler()
+        {
+            HttpClientHandler handler = new HttpClientHandler();
+            handler.ServerCertificateCustomValidationCallback = (message, cert, chain, errors) =>
+            {
+                if (cert.Issuer.Equals("CN=localhost"))
+                    return true;
+                return errors == System.Net.Security.SslPolicyErrors.None;
+            };
+            return handler;
+        }
 
         public async Task<ResponseService<TOut>> CallApi<TIn, TOut>(TIn root, string uri, HttpRequestType httpRequestType, int timeout = 10, bool auth = true)
         {
-            if (!await Ping()) throw new Exception();
+            //if (!await Ping()) throw new Exception();
 
             ResponseService<TIn> inObject = new ResponseService<TIn>();
             ResponseService<TOut> outObject = new ResponseService<TOut>();
@@ -160,4 +177,3 @@ namespace LongoToDo.Services
         }
     }
 }
-

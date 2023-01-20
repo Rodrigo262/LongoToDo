@@ -9,4 +9,3 @@ namespace LongoToDo.Services
         Task<bool> Ping();
     }
 }
-

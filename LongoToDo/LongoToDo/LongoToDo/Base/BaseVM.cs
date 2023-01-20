@@ -14,14 +14,16 @@ namespace LongoToDo.Base
         public bool IsVisible { get; set; }
         public bool IsRefreshing { get; set; }
 
-        public IDependencyService DependencyService;
+        public readonly IDependencyService dependencyService;
+
+        public BaseVM(IDependencyService dependency)
+        {
+            dependencyService = dependency;
+        }
 
         public BaseVM()
-		{
-		}
-        public BaseVM(CustomDependecyService dependecyService)
         {
-            //DependencyService = dependecyService.Get<IHttpClientService>();
+            dependencyService = CustomDependecyService.Instance;
         }
 
         private ICommand navigationBackCommand;
@@ -52,10 +54,11 @@ namespace LongoToDo.Base
 
         protected Task PushAsync(Page page)
             => Device.InvokeOnMainThreadAsync(() => FormsNavigation.PushAsync(page, true));
+
         protected Task PushModalAsync(Page page)
             => Device.InvokeOnMainThreadAsync(() => FormsNavigation.PushModalAsync(page, true));
+
         protected Task NavigationBack() => FormsNavigation.PopAsync(true);
         protected Task NavigationModalBack() => FormsNavigation.PopModalAsync(true);
     }
 }
-

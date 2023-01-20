@@ -3,22 +3,29 @@ using FluentAssertions;
 using Xunit;
 using Moq;
 using LongoToDo.Services;
+using LongoToDo.Features;
+using System.ComponentModel;
 
 namespace LongoTodoTest
 {
     public class UnitTest1
     {
+        DependencyServiceStub dependencyService = new DependencyServiceStub();
+
         [Fact]
-        public void Test1()
+        public async void Test1()
         {
             Mock<IHttpClientService> mockHttp = new Mock<IHttpClientService>();
 
             mockHttp.Setup(e => e.Ping()).ReturnsAsync(true);
 
-            mockHttp.Verify();
+            dependencyService.Register<IHttpClientService>(mockHttp.Object);
 
-            //false.Should().BeFalse();
+            MainVM main = new MainVM(dependencyService);
+
+            await main.OnAppearingAsync();
+
+            //main.Ping.Should().BeTrue();
         }
     }
 }
-
