@@ -1,0 +1,70 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <ProduceReferenceAssembly>true</ProduceReferenceAssembly>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DebugType>portable</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Xamarin.Forms" Version="5.0.0.2545" />
+    <PackageReference Include="Xamarin.Essentials" Version="1.7.4" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
+    <PackageReference Include="Fody" Version="6.6.4">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="PropertyChanged.Fody" Version="4.1.0" />
+    <PackageReference Include="Xamarin.CommunityToolkit" Version="2.0.5" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="Newtonsoft.Json" />
+    <None Remove="Fody" />
+    <None Remove="PropertyChanged.Fody" />
+    <None Remove="Xamarin.CommunityToolkit" />
+    <None Remove="Services\" />
+    <None Remove="Services\DependecyService\" />
+    <None Remove="Base\" />
+    <None Remove="Features\" />
+    <None Remove="Model\" />
+    <None Remove="Controls\" />
+    <None Remove="Fonts\Font-Free-Solid-900.otf" />
+    <None Remove="Resources\" />
+    <None Remove="Resources\Styles\" />
+    <None Remove="Resources\Fonts\IconBrand.otf" />
+    <None Remove="Resources\Fonts\SfProDisplayBold.otf" />
+    <None Remove="Resources\Fonts\" />
+    <None Remove="Resources\Resx\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Services\" />
+    <Folder Include="Services\DependecyService\" />
+    <Folder Include="Base\" />
+    <Folder Include="Features\" />
+    <Folder Include="Model\" />
+    <Folder Include="Controls\" />
+    <Folder Include="Resources\" />
+    <Folder Include="Resources\Styles\" />
+    <Folder Include="Resources\Fonts\" />
+    <Folder Include="Resources\Resx\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Fonts\IconBrand.otf" />
+    <EmbeddedResource Include="Resources\Fonts\SfProDisplayBold.otf" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Update="Resources\Resx\AppResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>AppResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="Resources\Resx\AppResources.Designer.cs">
+      <DependentUpon>AppResources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+</Project>
