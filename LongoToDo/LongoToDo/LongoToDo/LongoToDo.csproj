@@ -31,6 +31,14 @@
     <None Remove="Base\" />
     <None Remove="Features\" />
     <None Remove="Model\" />
+    <None Remove="Controls\" />
+    <None Remove="Fonts\Font-Free-Solid-900.otf" />
+    <None Remove="Resources\" />
+    <None Remove="Resources\Styles\" />
+    <None Remove="Resources\Fonts\IconBrand.otf" />
+    <None Remove="Resources\Fonts\SfProDisplayBold.otf" />
+    <None Remove="Resources\Fonts\" />
+    <None Remove="Resources\Resx\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Services\" />
@@ -38,5 +46,25 @@
     <Folder Include="Base\" />
     <Folder Include="Features\" />
     <Folder Include="Model\" />
+    <Folder Include="Controls\" />
+    <Folder Include="Resources\" />
+    <Folder Include="Resources\Styles\" />
+    <Folder Include="Resources\Fonts\" />
+    <Folder Include="Resources\Resx\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Fonts\IconBrand.otf" />
+    <EmbeddedResource Include="Resources\Fonts\SfProDisplayBold.otf" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Update="Resources\Resx\AppResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>AppResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="Resources\Resx\AppResources.Designer.cs">
+      <DependentUpon>AppResources.resx</DependentUpon>
+    </Compile>
   </ItemGroup>
 </Project>

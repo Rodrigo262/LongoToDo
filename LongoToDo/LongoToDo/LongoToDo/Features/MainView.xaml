@@ -2,11 +2,45 @@
 <features:MainViewViewXaml
     xmlns:features="clr-namespace:LongoToDo.Features"
     xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:LongoToDo.Controls"
+    xmlns:longoToDo="clr-namespace:LongoToDo"
+    BackgroundColor="{StaticResource Blanco}"
+    ios:Page.UseSafeArea="true"
     x:Class="LongoToDo.Features.MainView">
     <ContentPage.Content>
-        <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
-            <Label Text="Hola"/>
-        </StackLayout>
+        <Grid>
+            <StackLayout Grid.Row="0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Margin="20">
+                <Label Text="To Do List" Style="{StaticResource TitleStartBold}" Margin="20"/>
+                <CollectionView ItemsSource="{Binding ItemList}" SelectionMode="Single">
+                    <CollectionView.ItemsLayout>
+                        <LinearItemsLayout ItemSpacing="10" Orientation="Vertical" />
+                    </CollectionView.ItemsLayout>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Frame BorderColor="Black">
+                                <Grid Margin="5" ColumnDefinitions="*, 20">
+                                    <Label Text="{Binding Name}" Grid.Column="0" Style="{StaticResource BodyCenterNormal}"/>                            
+                                    <Label Style="{StaticResource CheckVerde}" Grid.Column="1" IsVisible="{Binding IsComplete}"/>
+                                </Grid>
+                            </Frame>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                    <CollectionView.EmptyView>
+                        <ContentView>
+                            <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+                                <Label Text="{longoToDo:Translate MsgEmptyList}" Style="{StaticResource BodyCenterNormal}"/>
+                            </StackLayout>
+                        </ContentView>
+                    </CollectionView.EmptyView>
+                </CollectionView>
+            </StackLayout>
+
+            <controls:LoadingView
+                Grid.Row="0"
+                IsVisible="{Binding IsVisible}"
+                Text="{longoToDo:Translate MsgLoading}"/>
+        </Grid>
     </ContentPage.Content>
 </features:MainViewViewXaml>
