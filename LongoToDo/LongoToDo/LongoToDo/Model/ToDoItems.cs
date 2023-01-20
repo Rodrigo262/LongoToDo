@@ -4,6 +4,7 @@ using LongoToDo.Services;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Net;
+using System.Diagnostics;
 
 namespace LongoToDo.Model
 {
@@ -55,7 +56,27 @@ namespace LongoToDo.Model
             }
             catch (Exception ex)
             {
+                Debug.WriteLine(ex.Message);
+            }
+            return false;
+        }
 
+        public async Task<bool> DeleteItem(ToDoItems toDoItems)
+        {
+            try
+            {
+                string url = $"?id={toDoItems.Key}";
+                ResponseService<object> response = await dependencyService.Get<IHttpClientService>().CallApi<ToDoItems, object>
+                (toDoItems, url, HttpRequestType.Delete, 10, false);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
             }
             return false;
         }
