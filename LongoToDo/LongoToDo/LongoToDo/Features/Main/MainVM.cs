@@ -8,6 +8,8 @@ using System.Collections.ObjectModel;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Input;
+using LongoToDo.Resources.Resx;
+using System.Diagnostics;
 
 namespace LongoToDo.Features
 {
@@ -16,6 +18,7 @@ namespace LongoToDo.Features
 		public ObservableCollection<ToDoItems> ItemList { get; set; }
 
         public ICommand NewItemCommand { get; protected set; }
+        public ICommand DeleteItemCommand { get; protected set; }
 
         public MainVM() { }
 
@@ -30,29 +33,41 @@ namespace LongoToDo.Features
 				IsVisible = true;
 
 				InitCommand();
-
-				IEnumerable<ToDoItems> list = await new ToDoItems(dependencyService).GetAll();
-
-				if (list.Any())
-				{
-					ItemList = new ObservableCollection<ToDoItems>(list);
-				}
+				await GetItems();	
 			}
 			catch (Exception ex)
 			{
+                Debug.WriteLine(ex.Message);
+            }
 
-			}
-
-			IsVisible = false;
+            IsVisible = false;
 			IsVisible = false;
 		}
 
         private void InitCommand()
         {
             NewItemCommand = new Command(async () => await NewItemAsync());
+            DeleteItemCommand = new Command<ToDoItems>(async (ToDoItems toDoItems) => await DeleteItemAsync(toDoItems));
         }
 
-		public async Task NewItemAsync()
+		public async Task GetItems()
+		{
+			try
+			{
+                IEnumerable<ToDoItems> list = await new ToDoItems(dependencyService).GetAll();
+
+                if (list.Any())
+                {
+                    ItemList = new ObservableCollection<ToDoItems>(list);
+                }
+            }
+			catch (Exception ex)
+			{
+                Debug.WriteLine(ex.Message);
+            }
+        }
+
+        public async Task NewItemAsync()
 		{
 			try
 			{
@@ -60,8 +75,26 @@ namespace LongoToDo.Features
 			}
 			catch (Exception ex)
 			{
-
+				Debug.WriteLine(ex.Message);
 			}
 		}
+
+		public async Task DeleteItemAsync(ToDoItems toDoItems)
+		{
+            try
+            {
+				bool response = await new ToDoItems(dependencyService).DeleteItem(toDoItems);
+
+				if (response)
+				{
+                    await AlertDialogService.Instance.ShowDialogAsync(AppResources.Info, $"ToDo item {toDoItems.Name} has been deleted correctly", AppResources.BtnOk);
+                    await GetItems();
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+            }
+        }
     }
 }
