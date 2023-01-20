@@ -16,7 +16,7 @@ namespace LongoToDo.Model
         public string Name { get; set; }
 
         [JsonProperty("IsComplete")]
-        public bool IsComplete { get; set; }
+        public bool IsComplete { get; set; } = false;
 
         public ToDoItems(IDependencyService dependency) : base(dependency) { }
 
@@ -26,7 +26,7 @@ namespace LongoToDo.Model
         {
             try
             {
-               ResponseService<IEnumerable<ToDoItems>> response = await dependencyService.Get<IHttpClientService>().CallApi<object, IEnumerable<ToDoItems>>
+                ResponseService<IEnumerable<ToDoItems>> response = await dependencyService.Get<IHttpClientService>().CallApi<object, IEnumerable<ToDoItems>>
                 (null, string.Empty, HttpRequestType.Get, 10,false);
 
                 if (response.IsSuccessStatusCode)
@@ -39,6 +39,25 @@ namespace LongoToDo.Model
             {
                 throw ex;
             }
+        }
+
+        public async Task<bool> SaveItem(ToDoItems toDoItems)
+        {
+            try
+            {
+                ResponseService<object> response = await dependencyService.Get<IHttpClientService>().CallApi<ToDoItems, object>
+                (toDoItems, string.Empty, HttpRequestType.Post, 10, false);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return false;
         }
     }
 
