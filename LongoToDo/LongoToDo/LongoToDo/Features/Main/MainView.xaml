@@ -13,18 +13,32 @@
         <Grid>
             <StackLayout Grid.Row="0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Margin="20">
                 <Label Text="{longoToDo:Translate TitleToDoList}" Style="{StaticResource TitleStartBold}" Margin="20"/>
-                <CollectionView ItemsSource="{Binding ItemList}" SelectionMode="Single">
+                <CollectionView ItemsSource="{Binding ItemList}" SelectionMode="Single" x:Name="collectionView">
                     <CollectionView.ItemsLayout>
                         <LinearItemsLayout ItemSpacing="10" Orientation="Vertical" />
                     </CollectionView.ItemsLayout>
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
-                            <Frame BorderColor="Black">
-                                <Grid Margin="5" ColumnDefinitions="*, 20">
-                                    <Label Text="{Binding Name}" Grid.Column="0" Style="{StaticResource BodyCenterNormal}"/>                            
-                                    <Label Style="{StaticResource CheckVerde}" Grid.Column="1" IsVisible="{Binding IsComplete}"/>
-                                </Grid>
-                            </Frame>
+                            <StackLayout x:Name="Item">
+                                <SwipeView BackgroundColor="{StaticResource Blanco}" Margin="2">
+                                    <SwipeView.RightItems>
+                                        <SwipeItems>
+                                            <SwipeItem
+                                                BackgroundColor="{StaticResource Rojo}"
+                                                BindingContext="{Binding Source={x:Reference collectionView}, Path=BindingContext}"
+                                                Command="{Binding Source={x:Reference collectionView}, Path=BindingContext.DeleteItemCommand}"
+                                                CommandParameter="{Binding Source={x:Reference Item}, Path=BindingContext}"
+                                                Text="Delete"/>
+                                        </SwipeItems>
+                                    </SwipeView.RightItems>
+                                    <Frame BorderColor="Black">
+                                    <Grid Margin="5" ColumnDefinitions="*, 20">
+                                        <Label Text="{Binding Name}" Grid.Column="0" Style="{StaticResource BodyCenterNormal}"/>                            
+                                        <Label Style="{StaticResource CheckVerde}" Grid.Column="1" IsVisible="{Binding IsComplete}"/>
+                                    </Grid>
+                                </Frame>
+                                </SwipeView>
+                            </StackLayout>
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
                     <CollectionView.EmptyView>

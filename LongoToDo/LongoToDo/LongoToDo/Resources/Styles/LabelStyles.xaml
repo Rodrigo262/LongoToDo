@@ -63,5 +63,6 @@
         <Setter Property="HorizontalOptions" Value="EndAndExpand"/>
         <Setter Property="TextColor" Value="{StaticResource Blanco}" />
     </Style>
+
 </ResourceDictionary>
 
