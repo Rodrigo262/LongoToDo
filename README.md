@@ -32,6 +32,7 @@ It is a small application that displays a list of things to do with several feat
 | :-------- | :------- | :-------------------------------- |
 | `id`      | `string` | **Required**. Id is the key object|
 
+#### Post item
 
 ```http
   POST /api/todo
@@ -41,6 +42,8 @@ It is a small application that displays a list of things to do with several feat
 | :-------- | :------- | :-------------------------------- |
 | `TodoItem`| `object` | **Required**. TodoItem |
 
+#### Put item
+
 ```http
   PUT /api/todo
 ```
@@ -48,6 +51,8 @@ It is a small application that displays a list of things to do with several feat
 | Parameter | Type     | Description                       |
 | :-------- | :------- | :-------------------------------- |
 | `TodoItem`| `object` | **Required**. TodoItem with key|
+
+#### Delete item
 
 ```http
   DELETE /api/todo
@@ -59,7 +64,7 @@ It is a small application that displays a list of things to do with several feat
 
 ## Documentation
 
-[Documentation](https://linktodocumentation)
+[Documentation](https://github.com/Rodrigo262/LongoToDo/blob/develop/DocumentacionTest.pdf)
 
 
 ## Authors
