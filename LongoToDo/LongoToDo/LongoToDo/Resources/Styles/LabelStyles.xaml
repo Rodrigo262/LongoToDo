@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ResourceDictionary
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="LongoToDo.LabelStyles"
+    xmlns:icons ="clr-namespace:LongoToDo.Fonts"
+    xmlns:Styles="clr-namespace:LongoToDo">
+
+    <ResourceDictionary.MergedDictionaries>
+        <Styles:Colours />
+    </ResourceDictionary.MergedDictionaries>
+
+    <Style x:Key="LabelStart" TargetType="Label">
+        <Setter Property="VerticalTextAlignment" Value="Center" />
+        <Setter Property="HorizontalTextAlignment" Value="Start" />
+    </Style>
+    <Style x:Key="LabelCenter" TargetType="Label">
+        <Setter Property="VerticalTextAlignment" Value="Center" />
+        <Setter Property="HorizontalTextAlignment" Value="Center" />
+    </Style>
+    <Style x:Key="LabelEnd" TargetType="Label">
+        <Setter Property="VerticalTextAlignment" Value="Center" />
+        <Setter Property="HorizontalTextAlignment" Value="End" />
+    </Style>
+
+    <Style
+        x:Key="TitleStartBold"
+        BasedOn="{StaticResource LabelStart}"
+        TargetType="Label">
+        <Setter Property="FontSize" Value="Title" />
+        <Setter Property="FontAttributes" Value="Bold" />
+        <Setter Property="FontFamily" Value="SfBold" />
+        <Setter Property="TextColor" Value="{StaticResource AzulOscuro}" />
+    </Style>
+
+    <Style
+        x:Key="BodyCenterNormal"
+        BasedOn="{StaticResource LabelStart}"
+        TargetType="Label">
+        <Setter Property="FontSize" Value="Body" />
+        <Setter Property="HorizontalOptions" Value="CenterAndExpand"/>
+        <Setter Property="TextColor" Value="{StaticResource AzulOscuro}" />
+    </Style>
+
+    <Style
+        x:Key="CheckVerde"
+        BasedOn="{StaticResource LabelStart}"
+        TargetType="Label">
+        <Setter Property="FontFamily" Value="IconBrand" />
+        <Setter Property="FontSize" Value="20"/>
+        <Setter Property="Text" Value="{x:Static icons:IconFont.Check}"/>
+        <Setter Property="HorizontalOptions" Value="EndAndExpand"/>
+        <Setter Property="TextColor" Value="{StaticResource Verde}" />
+    </Style>
+
+    <Style
+        x:Key="Mas"
+        BasedOn="{StaticResource LabelCenter}"
+        TargetType="Label">
+        <Setter Property="FontFamily" Value="IconBrand" />
+        <Setter Property="FontSize" Value="20"/>
+        <Setter Property="Text" Value="{x:Static icons:IconFont.Plus}"/>
+        <Setter Property="HorizontalOptions" Value="EndAndExpand"/>
+        <Setter Property="TextColor" Value="{StaticResource Blanco}" />
+    </Style>
+
+</ResourceDictionary>
+
