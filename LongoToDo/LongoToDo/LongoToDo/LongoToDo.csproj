@@ -41,6 +41,7 @@
     <None Remove="Resources\Resx\" />
     <None Remove="Features\Main\" />
     <None Remove="Services\HttpClientService\" />
+    <None Remove="Features\NewItem\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Services\" />
@@ -55,6 +56,7 @@
     <Folder Include="Resources\Resx\" />
     <Folder Include="Features\Main\" />
     <Folder Include="Services\HttpClientService\" />
+    <Folder Include="Features\NewItem\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\Fonts\IconBrand.otf" />
